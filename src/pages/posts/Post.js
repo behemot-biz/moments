@@ -2,10 +2,10 @@ import React from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { toHaveAccessibleErrorMessage } from "@testing-library/jest-dom/dist/matchers";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Post = (props) => {
   const {
@@ -26,6 +26,20 @@ const Post = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/posts/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/posts/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleLike = async () => {
     try {
@@ -34,31 +48,31 @@ const Post = (props) => {
         ...prevPosts,
         results: prevPosts.results.map((post) => {
           return post.id === id
-          ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
-          : post;
+            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+            : post;
         }),
       }));
-      
     } catch (err) {
       console.log(err);
-      
     }
-  }
+  };
+
   const handleUnlike = async () => {
     try {
-      const { data } = await axiosRes.delete(`/likes/${like_id}/`);
+      await axiosRes.delete(`/likes/${like_id}/`);
       setPosts((prevPosts) => ({
         ...prevPosts,
         results: prevPosts.results.map((post) => {
           return post.id === id
-          ? { ...post, likes_count: post.likes_count - 1, like_id: null }
-          : post;
+            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+            : post;
         }),
       }));
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -69,7 +83,12 @@ const Post = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage && "..."}
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>

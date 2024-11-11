@@ -1,6 +1,7 @@
-import {rest } from "msw"
+import { rest } from "msw";
 
-const baseUrl = "https://behemot-biz-django-rest-api-918c07318b07.herokuapp.com"
+const baseUrl =
+  "https://behemot-biz-django-rest-api-918c07318b07.herokuapp.com/";
 
 export const handlers = [
   rest.get(`${baseUrl}dj-rest-auth/user/`, (req, res, ctx) => {
@@ -17,7 +18,7 @@ export const handlers = [
       })
     );
   }),
-  rest.post(`${baseUrl}dj-rest-auth/user/`, (req, res, ctx) => {
+  rest.post(`${baseUrl}dj-rest-auth/logout/`, (req, res, ctx) => {
     return res(ctx.status(200));
   }),
 ];

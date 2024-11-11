@@ -5,15 +5,14 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
-import {
-  Form,
-  Button,
-  Image,
-  Col,
-  Row,
-  Container,
-  Alert,
-} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
+
 import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
 
@@ -43,7 +42,7 @@ const SignUpForm = () => {
       await axios.post("/dj-rest-auth/registration/", signUpData);
       history.push("/signin");
     } catch (err) {
-      console.log("Error Response Data:", err.response?.data);
+      // console.log("Error Response Data:", err.response?.data);
         setErrors(err.response?.data || {});
       // setErrors(err.response?.data);
     }

@@ -36,7 +36,7 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/posts/create"
     >
-      <i className="fas fa-plus-square"></i>Add post
+      <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
   const loggedInIcons = (
@@ -61,7 +61,6 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
-        onClick={() => {}}
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
@@ -77,9 +76,9 @@ const NavBar = () => {
         <i className="fas fa-sign-in-alt"></i>Sign in
       </NavLink>
       <NavLink
+        to="/signup"
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/signup"
       >
         <i className="fas fa-user-plus"></i>Sign up
       </NavLink>
@@ -115,6 +114,7 @@ const NavBar = () => {
             >
               <i className="fas fa-home"></i>Home
             </NavLink>
+
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>

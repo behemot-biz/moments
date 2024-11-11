@@ -7,7 +7,7 @@ import styles from "../../styles/CommentCreateEditForm.module.css";
 
 function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
-  
+
   const [formContent, setFormContent] = useState(content);
 
   const handleChange = (event) => {

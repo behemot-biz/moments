@@ -1,4 +1,0 @@
-/Users/work/.nvm/versions/node/v16.19.1/lib
-├── corepack@0.15.1
-└── npm@8.19.3
-

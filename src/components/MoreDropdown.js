@@ -1,5 +1,5 @@
 import React from "react";
-import Dropdown from "react-bootstrap//Dropdown";
+import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
 
@@ -15,7 +15,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
     }}
   />
 ));
-  
+
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -28,14 +28,14 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
         <Dropdown.Item
           className={styles.DropdownItem}
           onClick={handleEdit}
-          area-label="edit"
+          aria-label="edit"
         >
           <i className="fas fa-edit" />
         </Dropdown.Item>
         <Dropdown.Item
           className={styles.DropdownItem}
           onClick={handleDelete}
-          area-label="delete"
+          aria-label="delete"
         >
           <i className="fas fa-trash-alt" />
         </Dropdown.Item>
@@ -44,7 +44,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   );
 };
 
-export function ProfileEditDropdown({ id }) {
+export const ProfileEditDropdown = ({ id }) => {
   const history = useHistory();
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
@@ -73,4 +73,4 @@ export function ProfileEditDropdown({ id }) {
       </Dropdown.Menu>
     </Dropdown>
   );
-}
+};
